@@ -2,7 +2,7 @@ package com.gustavo.microservices.msclients.application;
 
 import com.gustavo.microservices.msclients.domain.Client;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,11 +13,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("clients")
 @RequiredArgsConstructor
+@Slf4j
 public class ClientController {
   private final ClientService clientService;
 
   @GetMapping
   public String status(){
+    log.info("Obtendo o status do ms de cliets");
     return "ok";
   }
 
@@ -28,8 +30,6 @@ public class ClientController {
     URI headerLocation = ServletUriComponentsBuilder.fromCurrentRequest().query("cpf={cpf}")
             .buildAndExpand(client.getCpf()).toUri();
     return ResponseEntity.created(headerLocation).build();
-
-//    new ResponseEntity<>(clientService.save(client), HttpStatus.CREATED);
   }
 
   @GetMapping(params = "cpf")
