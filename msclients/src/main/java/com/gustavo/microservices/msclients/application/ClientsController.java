@@ -14,8 +14,8 @@ import java.util.Optional;
 @RequestMapping("clients")
 @RequiredArgsConstructor
 @Slf4j
-public class ClientController {
-  private final ClientService clientService;
+public class ClientsController {
+  private final ClientsService clientService;
 
   @GetMapping
   public String status(){
@@ -25,7 +25,7 @@ public class ClientController {
 
   @PostMapping
   public ResponseEntity save(@RequestBody CreateClientDto createClientDto){
-    Client client = createClientDto.toModel();
+    Client client = createClientDto.toEntity();
     clientService.save(client);
     URI headerLocation = ServletUriComponentsBuilder.fromCurrentRequest().query("cpf={cpf}")
             .buildAndExpand(client.getCpf()).toUri();

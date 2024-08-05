@@ -1,15 +1,11 @@
 package com.gustavo.microservices.msclients.application;
 
 import com.gustavo.microservices.msclients.domain.Client;
-import lombok.Data;
 
-@Data
-public class CreateClientDto {
-  private String cpf;
-  private String name;
-  private Integer age;
+public record CreateClientDto(String cpf, String name, Integer age) {
 
-  public Client toModel(){
+
+  public Client toEntity(){
     return new Client(cpf, name, age);
   }
 }
