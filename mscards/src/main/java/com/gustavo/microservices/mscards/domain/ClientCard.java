@@ -19,4 +19,10 @@ public class ClientCard {
   @ManyToOne
   private Card card;
   private BigDecimal creditLimit;
+
+  public ClientCard(String cpf, Card card, BigDecimal creditLimit) {
+    this.cpf = cpf;
+    this.card = card;
+    this.creditLimit = creditLimit;
+  }
 }

@@ -2,10 +2,8 @@ package com.gustavo.microservices.mscreditevaluator.application;
 
 import com.gustavo.microservices.mscreditevaluator.application.exceptions.ClientNotFoundException;
 import com.gustavo.microservices.mscreditevaluator.application.exceptions.ErrorComunicationMicroservicesException;
-import com.gustavo.microservices.mscreditevaluator.domain.ApprovedCard;
-import com.gustavo.microservices.mscreditevaluator.domain.CheckData;
-import com.gustavo.microservices.mscreditevaluator.domain.ClientCheckResponse;
-import com.gustavo.microservices.mscreditevaluator.domain.ClientStatus;
+import com.gustavo.microservices.mscreditevaluator.application.exceptions.ErrorRequestCardException;
+import com.gustavo.microservices.mscreditevaluator.domain.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -48,6 +46,17 @@ public class CreditEvaluatorController {
       return ResponseEntity.notFound().build();
     } catch (ErrorComunicationMicroservicesException e) {
       return ResponseEntity.status(HttpStatus.resolve(e.getStatus())).body(e.getMessage());
+    }
+  }
+
+  @PostMapping("resquestcard")
+  public ResponseEntity requestCard(@RequestBody CardRequestDTO data){
+    try{
+      RequestedCardProtocol requestedCardProtocol = creditEvaluatorService.requestEmissionCard(data);
+      return ResponseEntity.ok(requestedCardProtocol);
+    }catch (ErrorRequestCardException e){
+      return ResponseEntity.internalServerError().body(e.getMessage());
+
     }
   }
 }
