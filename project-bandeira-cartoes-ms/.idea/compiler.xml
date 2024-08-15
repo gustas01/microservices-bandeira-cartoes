@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eurekaserver" />
+        <module name="mscards" />
+        <module name="mscloudgateway" />
+        <module name="mscreditevaluator" />
+        <module name="msclients" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eurekaserver" options="-parameters" />
+      <module name="mscards" options="-parameters" />
+      <module name="msclients" options="-parameters" />
+      <module name="mscloudgateway" options="-parameters" />
+      <module name="mscreditevaluator" options="-parameters" />
+      <module name="project-bandeira-cartoes-ms" options="" />
+    </option>
+  </component>
+</project>
